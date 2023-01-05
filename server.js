@@ -1,11 +1,13 @@
+const cors = require('cors');
 const express = require('express');
 const bodyParser = require('body-parser');
-//const path = require('path');
 const nodemailer = require('nodemailer');
+require('dotenv').config();
 
 const app = express();
+app.use(cors())
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Origin', process.env.URL);
     res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
@@ -13,6 +15,8 @@ app.use((req, res, next) => {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.get('/test', (req, res) => {
+
+    console.log(process.env.EMAIL, process.env.PASS);
     res.json({name:'Vzgo'})
 })
 
@@ -29,14 +33,13 @@ app.post('/send', (req, res) => {
       <p>${req.body.message}</p>
     `;
 
-
 let transporter = nodemailer.createTransport({
     service: "Gmail",
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-        user: 'simplysimplyan@gmail.com',
-        pass: 'simply789'
+        user:  process.env.EMAIL,
+        pass: process.env.PASS
     },
     tls: {
         rejectUnauthorized: false
@@ -44,7 +47,7 @@ let transporter = nodemailer.createTransport({
 });
 
 let mailOptions = {
-    from: '"simply simplyan" simplysimplyan@gmail.com', // sender address
+    from: `"simply simplyan" ${process.env.EMAIL}`, // sender address
     to: 'tigranharutyunyan59@gmail.com', // list of receivers
     subject: 'Node Contact Request', // Subject line
     text: 'Hello world?', // plain text body
@@ -61,4 +64,4 @@ let mailOptions = {
   });
   });
 
-app.listen(8000, () => console.log('Server started...'));
+app.listen(process.env.PORT || 8000, () => console.log('Server started...'));
