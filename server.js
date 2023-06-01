@@ -26,11 +26,15 @@ app.post('/send', (req, res) => {
       <p>You have a new contact request</p>
       <h3>Contact Details</h3>
       <ul>  
-        <li>Name: ${req.body.name}</li>
-        <li>Company: ${req.body.company}</li>
+        <li>Name: ${req.body.values.name}</li>
+        <li>Company: ${req.body.values.company}</li>
+        <li>Phone: ${req.body.values.name}</li>
+        <li>Email: ${req.body.values.email}</li>
+        <li>Business: ${req.body.values.business}</li>
+        <li>Website: ${req.body.values.website}</li>
       </ul>
       <h3>Message</h3>
-      <p>${req.body.message}</p>
+      <p>${req.body.values.message}</p>
     `;
 
 let transporter = nodemailer.createTransport({
