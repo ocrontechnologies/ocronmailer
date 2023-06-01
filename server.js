@@ -47,8 +47,8 @@ let transporter = nodemailer.createTransport({
 });
 
 let mailOptions = {
-    from: `"simply simplyan" ${process.env.EMAIL}`, // sender address
-    to: 'tigranharutyunyan59@gmail.com', // list of receivers
+    from: `"ocron website" ${process.env.EMAIL}`, // sender address
+    to: 'ocrontechnologies@gmail.com', // list of receivers
     subject: 'Node Contact Request', // Subject line
     text: 'Hello world?', // plain text body
     html: output // html body
