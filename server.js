@@ -62,6 +62,8 @@ let mailOptions = {
       console.log('Message sent: %s', info.messageId);   
       console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
   });
+
+  res.send(200, 'sent')
   });
 
 app.listen(process.env.PORT || 8000, () => console.log('Server started...'));
