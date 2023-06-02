@@ -28,7 +28,7 @@ app.post('/send', (req, res) => {
       <ul>  
         <li>Name: ${req.body.values.name}</li>
         <li>Company: ${req.body.values.company}</li>
-        <li>Phone: ${req.body.values.name}</li>
+        <li>Phone: ${req.body.values.phone}</li>
         <li>Email: ${req.body.values.email}</li>
         <li>Business: ${req.body.values.business}</li>
         <li>Website: ${req.body.values.website}</li>
@@ -51,7 +51,7 @@ let transporter = nodemailer.createTransport({
 });
 
 let mailOptions = {
-    from: `"ocron website" ${process.env.EMAIL}`, // sender address
+    from: `"ocron website" ${req.body.values.name} ${process.env.EMAIL}`, // sender address
     to: 'ocrontechnologies@gmail.com', // list of receivers
     subject: 'Node Contact Request', // Subject line
     text: 'Hello world?', // plain text body
